@@ -6,13 +6,13 @@
 #include "Widgets/SCompoundWidget.h"
 
 /**
- *
+ * 
  */
-class CUSTOMCOMPONENTS_UE4_API SOverflowTextBlock : public STextBlock
+class CUSTOMCOMPONENTS_API SRootWidget : public SCompoundWidget
 {
 public:
-	SLATE_BEGIN_ARGS(SOverflowTextBlock)
-		{}
+	SLATE_BEGIN_ARGS(SRootWidget)
+	{}
 	SLATE_END_ARGS()
 
 	/** Constructs this widget with InArgs */

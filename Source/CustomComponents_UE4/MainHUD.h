@@ -13,5 +13,9 @@ UCLASS()
 class CUSTOMCOMPONENTS_UE4_API AMainHUD : public AHUD
 {
 	GENERATED_BODY()
+
+	virtual void PostInitializeComponents() override;
+
+	TSharedPtr<SWidget> RootView;
 	
 };
