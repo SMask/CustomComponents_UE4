@@ -4,7 +4,6 @@
 #include "Widgets/SOverflowTextBlock.h"
 #include "Framework/Application/SlateApplication.h"
 #include "Fonts/FontMeasure.h"
-#include "Brushes/SlateColorBrush.h"
 #include "SlateOptMacros.h"
 
 BEGIN_SLATE_FUNCTION_BUILD_OPTIMIZATION
