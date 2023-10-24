@@ -6,9 +6,41 @@
 #include "Widgets/SCompoundWidget.h"
 
 /**
- *
+ * 超出长度省略号，仅单行
  */
-class CUSTOMCOMPONENTS_API SOverflowTextBlock : public STextBlock
+class SOverflowTextBlock : public SCompoundWidget
 {
+public:
+	SLATE_BEGIN_ARGS(SOverflowTextBlock)
+		: _Text()
+		, _TextStyle(&FCoreStyle::Get().GetWidgetStyle<FTextBlockStyle>("NormalText"))
+		, _Font()
+		, _ColorAndOpacity()
+		, _Margin()
+		{}
+		SLATE_ATTRIBUTE(FText, Text)
+		SLATE_STYLE_ARGUMENT(FTextBlockStyle, TextStyle)
+		SLATE_ATTRIBUTE(FSlateFontInfo, Font)
+		SLATE_ATTRIBUTE(FSlateColor, ColorAndOpacity)
+		SLATE_ATTRIBUTE(FMargin, Margin)
+	SLATE_END_ARGS()
 
+	/** Constructs this widget with InArgs */
+	void Construct(const FArguments& InArgs);
+
+public:
+	const FText& GetText() const;
+private:
+	FSlateFontInfo GetFont() const;
+private:
+	TAttribute<FText> Text;
+	FTextBlockStyle TextStyle;
+	TAttribute<FSlateFontInfo> Font;
+	TAttribute<FSlateColor> ColorAndOpacity;
+	TAttribute<FMargin> Margin;
+
+	TSharedPtr<STextBlock> TextBlock;
+
+public:
+	virtual int32 OnPaint(const FPaintArgs& Args, const FGeometry& AllottedGeometry, const FSlateRect& MyCullingRect, FSlateWindowElementList& OutDrawElements, int32 LayerId, const FWidgetStyle& InWidgetStyle, bool bParentEnabled) const override;
 };
