@@ -41,12 +41,6 @@ private:
 
 	TSharedPtr<STextBlock> TextBlock;
 
-	bool bStartHoveredTimer = false;// 是否启动Hover定时器
-	const float HoveredTimeWait = 0.35f;// Hover执行等待时长
-	float HoveredTimeTotal = 0.0f;// Hover定时器变量
-
-	bool bWasHovered = false;// 是否已经Hovered，true则会执行OnUnhovered方法
-
 public:
 	virtual void Tick(const FGeometry& AllottedGeometry, const double InCurrentTime, const float InDeltaTime) override;
 
@@ -58,4 +52,11 @@ public:
 
 	void OnHovered();
 	void OnUnhovered();
+
+private:
+	bool bStartHoveredTimer = false;// 是否启动Hover定时器
+	const float HoveredTimeWait = 0.35f;// Hover执行等待时长
+	float HoveredTimeTotal = 0.0f;// Hover定时器变量
+
+	bool bWasHovered = false;// 是否已经Hovered，true则会执行OnUnhovered方法
 };
