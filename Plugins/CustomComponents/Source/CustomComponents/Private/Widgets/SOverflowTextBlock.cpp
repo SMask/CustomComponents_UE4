@@ -35,7 +35,7 @@ FSlateFontInfo SOverflowTextBlock::GetFont() const
 	return Font.IsSet() ? Font.Get() : TextStyle.Font;
 }
 
-int32 SOverflowTextBlock::OnPaint(const FPaintArgs& Args, const FGeometry& AllottedGeometry, const FSlateRect& MyCullingRect, FSlateWindowElementList& OutDrawElements, int32 LayerId, const FWidgetStyle& InWidgetStyle, bool bParentEnabled) const
+void SOverflowTextBlock::Tick(const FGeometry& AllottedGeometry, const double InCurrentTime, const float InDeltaTime)
 {
 	const FString Content = TextBlock->GetText().ToString();
 	const FVector2D ViewSize = AllottedGeometry.ToPaintGeometry().GetLocalSize();
@@ -63,7 +63,6 @@ int32 SOverflowTextBlock::OnPaint(const FPaintArgs& Args, const FGeometry& Allot
 		}
 		TextBlock->SetText(Content.Left(Right) + TEXT("…"));
 	}
-	return SCompoundWidget::OnPaint(Args, AllottedGeometry, MyCullingRect, OutDrawElements, LayerId, InWidgetStyle, bParentEnabled);
 }
 
 END_SLATE_FUNCTION_BUILD_OPTIMIZATION
