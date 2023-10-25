@@ -63,6 +63,64 @@ void SOverflowTextBlock::Tick(const FGeometry& AllottedGeometry, const double In
 		}
 		TextBlock->SetText(Content.Left(Right) + TEXT("…"));
 	}
+
+	if (bStartHoveredTimer)
+	{
+		HoveredTimeTotal += InDeltaTime;
+		if (HoveredTimeTotal >= HoveredTimeWait)
+		{
+			StopHoveredTimer();
+
+			bWasHovered = true;
+
+			OnHovered();
+		}
+	}
+}
+
+void SOverflowTextBlock::OnMouseEnter(const FGeometry& MyGeometry, const FPointerEvent& MouseEvent)
+{
+	SCompoundWidget::OnMouseEnter(MyGeometry, MouseEvent);
+
+	StartHoveredTimer();
+}
+
+void SOverflowTextBlock::OnMouseLeave(const FPointerEvent& MouseEvent)
+{
+	// 因为添加了Hover等待时间，所以这里的bWasHovered需要自己来写逻辑，否则可以参考SButton的OnMouseEnter, OnMouseLeave方法
+	//const bool bWasHovered = IsHovered();
+
+	SCompoundWidget::OnMouseLeave(MouseEvent);
+
+	StopHoveredTimer();
+
+	if (bWasHovered)
+	{
+		OnUnhovered();
+	}
+
+	bWasHovered = false;
+}
+
+void SOverflowTextBlock::StartHoveredTimer()
+{
+	bStartHoveredTimer = true;
+}
+
+void SOverflowTextBlock::StopHoveredTimer()
+{
+	bStartHoveredTimer = false;
+	HoveredTimeTotal = 0.0f;
+}
+
+void SOverflowTextBlock::OnHovered()
+{
+	UE_LOG(LogTemp, Log, TEXT("OnHovered"));
+}
+
+void SOverflowTextBlock::OnUnhovered()
+{
+	UE_LOG(LogTemp, Log, TEXT("OnUnhovered"));
 }
 
 END_SLATE_FUNCTION_BUILD_OPTIMIZATION

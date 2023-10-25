@@ -54,13 +54,36 @@ void SRootWidget::Construct(const FArguments& InArgs)
 						.Text(FText::FromString(TEXT("123ABC012DEF345GHIJ6789")))
 				]
 
-				// SOverflowTextBlock
+				// SBorder
 				+ SCanvas::Slot()
 				.Position(FVector2D(200, 320))
 				.Size(FVector2D(100, 25))
 				[
 					SNew(SBorder)
 						.BorderImage(&ColorYellow)
+				]
+
+				// SButton
+				+ SCanvas::Slot()
+				.Position(FVector2D(200, 350))
+				.Size(FVector2D(100, 25))
+				[
+					SNew(SButton)
+						.OnClicked_Lambda([]()
+							{
+								UE_LOG(LogTemp, Log, TEXT("Button OnClicked"));
+
+								return FReply::Handled();
+							})
+						.Text(FText::FromString(TEXT("Button")))
+								.OnHovered_Lambda([]()
+									{
+										UE_LOG(LogTemp, Log, TEXT("Button OnHovered"));
+									})
+								.OnUnhovered_Lambda([]()
+									{
+										UE_LOG(LogTemp, Log, TEXT("Button OnUnhovered"));
+									})
 				]
 		];
 }
