@@ -41,7 +41,9 @@ private:
 
 	TSharedPtr<STextBlock> TextBlock;
 
-	TAttribute<FText> TextDisplay;// 实际显示的文本
+	const FString EllipsisStr = TEXT("…");// 省略号
+	FString TextDisplayContentSource;// 当前显示的原始文本，未裁剪
+	FString TextDisplayContent;// 当前显示的文本，可能已经裁剪
 
 public:
 	virtual void Tick(const FGeometry& AllottedGeometry, const double InCurrentTime, const float InDeltaTime) override;
