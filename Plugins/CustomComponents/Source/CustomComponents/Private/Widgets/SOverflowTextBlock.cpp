@@ -15,10 +15,12 @@ void SOverflowTextBlock::Construct(const FArguments& InArgs)
 	ColorAndOpacity = InArgs._ColorAndOpacity;
 	Margin = InArgs._Margin;
 
+	TextDisplay = Text;
+
 	ChildSlot
 		[
 			SAssignNew(TextBlock, STextBlock)
-				.Text(Text)
+				.Text(TextDisplay)
 				.TextStyle(&TextStyle)
 				.ColorAndOpacity(ColorAndOpacity)
 				.Margin(Margin)
@@ -37,7 +39,7 @@ FSlateFontInfo SOverflowTextBlock::GetFont() const
 
 void SOverflowTextBlock::Tick(const FGeometry& AllottedGeometry, const double InCurrentTime, const float InDeltaTime)
 {
-	const FString Content = TextBlock->GetText().ToString();
+	const FString Content = TextDisplay.Get().ToString();
 	const FVector2D ViewSize = AllottedGeometry.ToPaintGeometry().GetLocalSize();
 	const FVector2D TextSize = FSlateApplication::Get().GetRenderer()->GetFontMeasureService()->Measure(Content, GetFont());
 
@@ -61,7 +63,8 @@ void SOverflowTextBlock::Tick(const FGeometry& AllottedGeometry, const double In
 				Right = Mid - 1;
 			}
 		}
-		TextBlock->SetText(Content.Left(Right) + TEXT("…"));
+		TextDisplay = FText::FromString(Content.Left(Right) + TEXT("…"));
+		TextBlock->SetText(TextDisplay);
 	}
 
 	if (bStartHoveredTimer)

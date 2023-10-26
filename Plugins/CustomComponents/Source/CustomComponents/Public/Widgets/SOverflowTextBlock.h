@@ -41,6 +41,8 @@ private:
 
 	TSharedPtr<STextBlock> TextBlock;
 
+	TAttribute<FText> TextDisplay;// 实际显示的文本
+
 public:
 	virtual void Tick(const FGeometry& AllottedGeometry, const double InCurrentTime, const float InDeltaTime) override;
 
