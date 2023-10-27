@@ -11,6 +11,7 @@ BEGIN_SLATE_FUNCTION_BUILD_OPTIMIZATION
 void SRootWidget::Construct(const FArguments& InArgs)
 {
 	static FSlateColorBrush ColorYellow = FSlateColorBrush(FLinearColor(1.0f, 1.0f, 0.0f, 1.0f));
+	static FSlateColorBrush ColorBlack = FSlateColorBrush(FLinearColor(0.0f, 0.0f, 0.0f, 1.0f));
 
 	ChildSlot
 		[
@@ -18,7 +19,7 @@ void SRootWidget::Construct(const FArguments& InArgs)
 
 				// SOverflowTextBlock
 				+ SCanvas::Slot()
-				.Position(FVector2D(200, 200))
+				.Position(FVector2D(100, 100))
 				.Size(FVector2D(100, 25))
 				[
 					SNew(SOverflowTextBlock)
@@ -27,7 +28,7 @@ void SRootWidget::Construct(const FArguments& InArgs)
 
 				// SOverflowTextBlock
 				+ SCanvas::Slot()
-				.Position(FVector2D(200, 230))
+				.Position(FVector2D(100, 130))
 				.Size(FVector2D(100, 25))
 				[
 					SNew(SOverflowTextBlock)
@@ -37,7 +38,7 @@ void SRootWidget::Construct(const FArguments& InArgs)
 
 				// SOverflowTextBlock
 				+ SCanvas::Slot()
-				.Position(FVector2D(200, 260))
+				.Position(FVector2D(100, 160))
 				.Size(FVector2D(100, 25))
 				[
 					SNew(SOverflowTextBlock)
@@ -46,7 +47,7 @@ void SRootWidget::Construct(const FArguments& InArgs)
 
 				// SOverflowTextBlock
 				+ SCanvas::Slot()
-				.Position(FVector2D(200, 290))
+				.Position(FVector2D(100, 190))
 				.Size(FVector2D(100, 25))
 				[
 					SNew(SOverflowTextBlock)
@@ -56,7 +57,7 @@ void SRootWidget::Construct(const FArguments& InArgs)
 
 				// SBorder
 				+ SCanvas::Slot()
-				.Position(FVector2D(200, 320))
+				.Position(FVector2D(100, 220))
 				.Size(FVector2D(100, 25))
 				[
 					SNew(SBorder)
@@ -65,7 +66,7 @@ void SRootWidget::Construct(const FArguments& InArgs)
 
 				// SButton
 				+ SCanvas::Slot()
-				.Position(FVector2D(200, 350))
+				.Position(FVector2D(100, 250))
 				.Size(FVector2D(100, 25))
 				[
 					SNew(SButton)
