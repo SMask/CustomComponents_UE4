@@ -28,8 +28,7 @@ void AMainPlayerController::OnEndPressed()
 	UGameplayStatics::GetAllActorsWithTag(GetWorld(), TEXT("BP_Actor"), ActorArr);
 	for (AActor* Actor : ActorArr)
 	{
-		UE_LOG(LogTemp, Log, TEXT("OnEndPressed === Name: %s"), *Actor->GetName());
-
+		// Actor原始信息
 		FVector Origin;
 		FVector BoxExtent;
 		Actor->GetActorBounds(true, Origin, BoxExtent, false);
@@ -40,22 +39,24 @@ void AMainPlayerController::OnEndPressed()
 		CollisonQueryParams.bReturnPhysicalMaterial = false;
 		CollisonQueryParams.AddIgnoredActor(Actor);
 
-		// 起始点和检测结果
-		FVector BeginLoc = Actor->GetActorLocation();
-		FVector EndLoc = BeginLoc + FVector::DownVector * 100000;
+		// 起终点和检测结果
+		FVector BeginLocation = Actor->GetActorLocation();
+		FVector EndLocation = BeginLocation + FVector::DownVector * 100000;
 		FHitResult HitResult;
 
+		UE_LOG(LogTemp, Log, TEXT("OnEndPressed === Name: %s"), *Actor->GetName());
 		UE_LOG(LogTemp, Log, TEXT("OnEndPressed === %s === BoxExtent"), *BoxExtent.ToString());
 		UE_LOG(LogTemp, Log, TEXT("OnEndPressed === %s === Origin"), *Origin.ToString());
-		UE_LOG(LogTemp, Log, TEXT("OnEndPressed === %s === BeginLoc"), *BeginLoc.ToString());
+		UE_LOG(LogTemp, Log, TEXT("OnEndPressed === %s === BeginLoc"), *BeginLocation.ToString());
 
 		// 射线检测
-		GetWorld()->LineTraceSingleByChannel(HitResult, BeginLoc, EndLoc, ECollisionChannel::ECC_Visibility, CollisonQueryParams);
+		GetWorld()->LineTraceSingleByChannel(HitResult, BeginLocation, EndLocation, ECollisionChannel::ECC_Visibility, CollisonQueryParams);
 		if (HitResult.GetActor())
 		{
+			// 最终位置计算
 			FVector HitLocation = HitResult.Location;
 			FVector ResultLocation(HitLocation);
-			ResultLocation.Z = HitLocation.Z + BeginLoc.Z - Origin.Z + BoxExtent.Z;
+			ResultLocation.Z = HitLocation.Z + BeginLocation.Z - Origin.Z + BoxExtent.Z;
 
 			UE_LOG(LogTemp, Log, TEXT("OnEndPressed === %s === HitLocation"), *HitLocation.ToString());
 			UE_LOG(LogTemp, Log, TEXT("OnEndPressed === %s === ResultLocation"), *ResultLocation.ToString());
