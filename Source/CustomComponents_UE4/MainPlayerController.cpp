@@ -40,23 +40,23 @@ void AMainPlayerController::OnEndPressed()
 		CollisonQueryParams.AddIgnoredActor(Actor);
 
 		// 起终点和检测结果
-		FVector BeginLocation = Actor->GetActorLocation();
-		FVector EndLocation = BeginLocation + FVector::DownVector * 100000;
+		FVector StartLocation = Actor->GetActorLocation();
+		FVector EndLocation = StartLocation + FVector::DownVector * 100000;
 		FHitResult HitResult;
 
 		UE_LOG(LogTemp, Log, TEXT("OnEndPressed === Name: %s"), *Actor->GetName());
 		UE_LOG(LogTemp, Log, TEXT("OnEndPressed === %s === BoxExtent"), *BoxExtent.ToString());
 		UE_LOG(LogTemp, Log, TEXT("OnEndPressed === %s === Origin"), *Origin.ToString());
-		UE_LOG(LogTemp, Log, TEXT("OnEndPressed === %s === BeginLoc"), *BeginLocation.ToString());
+		UE_LOG(LogTemp, Log, TEXT("OnEndPressed === %s === BeginLoc"), *StartLocation.ToString());
 
 		// 射线检测
-		GetWorld()->LineTraceSingleByChannel(HitResult, BeginLocation, EndLocation, ECollisionChannel::ECC_Visibility, CollisonQueryParams);
+		GetWorld()->LineTraceSingleByChannel(HitResult, StartLocation, EndLocation, ECollisionChannel::ECC_Visibility, CollisonQueryParams);
 		if (HitResult.GetActor())
 		{
 			// 最终位置计算
 			FVector HitLocation = HitResult.Location;
 			FVector ResultLocation(HitLocation);
-			ResultLocation.Z = HitLocation.Z + BeginLocation.Z - Origin.Z + BoxExtent.Z;
+			ResultLocation.Z = HitLocation.Z + StartLocation.Z - Origin.Z + BoxExtent.Z;
 
 			UE_LOG(LogTemp, Log, TEXT("OnEndPressed === %s === HitLocation"), *HitLocation.ToString());
 			UE_LOG(LogTemp, Log, TEXT("OnEndPressed === %s === ResultLocation"), *ResultLocation.ToString());
