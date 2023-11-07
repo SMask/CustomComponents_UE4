@@ -47,7 +47,7 @@ void AMainPlayerController::OnEndPressed()
 		UE_LOG(LogTemp, Log, TEXT("OnEndPressed === Name: %s"), *Actor->GetName());
 		UE_LOG(LogTemp, Log, TEXT("OnEndPressed === %s === BoxExtent"), *BoxExtent.ToString());
 		UE_LOG(LogTemp, Log, TEXT("OnEndPressed === %s === Origin"), *Origin.ToString());
-		UE_LOG(LogTemp, Log, TEXT("OnEndPressed === %s === BeginLoc"), *StartLocation.ToString());
+		UE_LOG(LogTemp, Log, TEXT("OnEndPressed === %s === StartLocation"), *StartLocation.ToString());
 
 		// 射线检测
 		GetWorld()->LineTraceSingleByChannel(HitResult, StartLocation, EndLocation, ECollisionChannel::ECC_Visibility, CollisonQueryParams);
