@@ -19,10 +19,10 @@ APostProcessVolumeActor::APostProcessVolumeActor()
 
 	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
 	BoxCollision = CreateDefaultSubobject<UBoxComponent>(TEXT("BoxCollision"));
-	PostProcessComponent = CreateDefaultSubobject<UPostProcessComponent>(TEXT("PostProcessComponent"));
 	BoxCollision->SetBoxExtent(FVector(300.0f, 100.0f, 100.0f));
 	BoxCollision->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 	BoxCollision->RegisterComponent();
+	PostProcessComponent = CreateDefaultSubobject<UPostProcessComponent>(TEXT("PostProcessComponent"));
 	PostProcessComponent->AttachToComponent(BoxCollision, FAttachmentTransformRules::KeepRelativeTransform);
 
 	PostProcessComponent->bUnbound = false;
@@ -34,9 +34,9 @@ APostProcessVolumeActor::APostProcessVolumeActor(const FObjectInitializer& Objec
 {
 	RootComponent = ObjectInitializer.CreateDefaultSubobject<USceneComponent>(this, TEXT("Root"));
 	BoxCollision = ObjectInitializer.CreateDefaultSubobject<UBoxComponent>(this, TEXT("BoxCollision"));
-	PostProcessComponent = CreateDefaultSubobject<UPostProcessComponent>(TEXT("PostProcessComponent"));
 	BoxCollision->SetBoxExtent(FVector(200.0f, 100.0f, 100.0f));
 	BoxCollision->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
+	PostProcessComponent = CreateDefaultSubobject<UPostProcessComponent>(TEXT("PostProcessComponent"));
 	PostProcessComponent->AttachToComponent(BoxCollision, FAttachmentTransformRules::KeepRelativeTransform);
 
 	PostProcessComponent->bUnbound = false;
