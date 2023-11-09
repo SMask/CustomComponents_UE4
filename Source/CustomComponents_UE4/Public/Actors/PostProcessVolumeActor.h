@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Engine/PostProcessVolume.h"
+#include "GameFramework/Actor.h"
 #include "Components/BoxComponent.h"
 #include "Components/PostProcessComponent.h"
 #include "PostProcessVolumeActor.generated.h"
