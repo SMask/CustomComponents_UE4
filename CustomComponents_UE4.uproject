@@ -23,6 +23,14 @@
 			"SupportedTargetPlatforms": [
 				"Win64"
 			]
+		},
+		{
+			"Name": "MovieRenderPipeline",
+			"Enabled": true
+		},
+		{
+			"Name": "AvidDNxMedia",
+			"Enabled": true
 		}
 	]
 }

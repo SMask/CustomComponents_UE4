@@ -74,6 +74,8 @@ void SRootWidget::Construct(const FArguments& InArgs)
 							{
 								UE_LOG(LogTemp, Log, TEXT("Button OnClicked"));
 
+								FMessageDialog::Open(EAppMsgType::Ok, FText::FromString(TEXT("Button")));
+
 								return FReply::Handled();
 							})
 						.Text(FText::FromString(TEXT("Button")))
@@ -86,6 +88,29 @@ void SRootWidget::Construct(const FArguments& InArgs)
 										UE_LOG(LogTemp, Log, TEXT("Button OnUnhovered"));
 									})
 				]
+
+				// SButton
+				+ SCanvas::Slot()
+				.Position(FVector2D(100, 280))
+				.Size(FVector2D(100, 25))
+				[
+					SNew(SButton)
+						.OnClicked_Lambda([this]()
+							{
+								UE_LOG(LogTemp, Log, TEXT("Button OnMovieSceneCapture"));
+
+								OnMovieSceneCapture();
+
+								return FReply::Handled();
+							})
+						.Text(FText::FromString(TEXT("MovieSceneCapture")))
+				]
 		];
+}
+void SRootWidget::OnMovieSceneCapture()
+{
+	FRequestPlaySessionParams Params;
+
+	GEditor->RequestPlaySession(Params);
 }
 END_SLATE_FUNCTION_BUILD_OPTIMIZATION

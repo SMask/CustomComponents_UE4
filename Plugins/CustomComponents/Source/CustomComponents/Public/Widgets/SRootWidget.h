@@ -6,15 +6,18 @@
 #include "Widgets/SCompoundWidget.h"
 
 /**
- * 
+ *
  */
 class CUSTOMCOMPONENTS_API SRootWidget : public SCompoundWidget
 {
 public:
 	SLATE_BEGIN_ARGS(SRootWidget)
-	{}
+		{}
 	SLATE_END_ARGS()
 
 	/** Constructs this widget with InArgs */
 	void Construct(const FArguments& InArgs);
+
+protected:
+	void OnMovieSceneCapture();
 };
