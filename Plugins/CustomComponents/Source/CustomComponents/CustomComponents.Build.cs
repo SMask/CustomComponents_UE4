@@ -42,6 +42,7 @@ public class CustomComponents : ModuleRules
 				"Engine",
 				"Slate",
 				"SlateCore",
+				"MovieSceneCapture",
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);

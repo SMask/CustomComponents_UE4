@@ -5,6 +5,7 @@
 #include "Widgets/SCanvas.h"
 #include "Widgets/SOverflowTextBlock.h"
 #include "Brushes/SlateColorBrush.h"
+#include "Utils/MovieSceneCaptureHelper.h"
 #include "SlateOptMacros.h"
 
 BEGIN_SLATE_FUNCTION_BUILD_OPTIMIZATION
@@ -70,6 +71,7 @@ void SRootWidget::Construct(const FArguments& InArgs)
 				.Size(FVector2D(100, 25))
 				[
 					SNew(SButton)
+						.Text(FText::FromString(TEXT("Button")))
 						.OnClicked_Lambda([]()
 							{
 								UE_LOG(LogTemp, Log, TEXT("Button OnClicked"));
@@ -78,11 +80,10 @@ void SRootWidget::Construct(const FArguments& InArgs)
 
 								return FReply::Handled();
 							})
-						.Text(FText::FromString(TEXT("Button")))
-								.OnHovered_Lambda([]()
-									{
-										UE_LOG(LogTemp, Log, TEXT("Button OnHovered"));
-									})
+						.OnHovered_Lambda([]()
+							{
+								UE_LOG(LogTemp, Log, TEXT("Button OnHovered"));
+							})
 								.OnUnhovered_Lambda([]()
 									{
 										UE_LOG(LogTemp, Log, TEXT("Button OnUnhovered"));
@@ -92,25 +93,36 @@ void SRootWidget::Construct(const FArguments& InArgs)
 				// SButton
 				+ SCanvas::Slot()
 				.Position(FVector2D(100, 280))
-				.Size(FVector2D(100, 25))
+				.Size(FVector2D(200, 25))
 				[
 					SNew(SButton)
+						.Text(FText::FromString(TEXT("MovieSceneCapture Start")))
 						.OnClicked_Lambda([this]()
 							{
-								UE_LOG(LogTemp, Log, TEXT("Button OnMovieSceneCapture"));
+								UE_LOG(LogTemp, Log, TEXT("Button OnMovieSceneCapture Start"));
 
-								OnMovieSceneCapture();
+								MovieSceneCaptureHelper::GetInstance().Start();
 
 								return FReply::Handled();
 							})
-						.Text(FText::FromString(TEXT("MovieSceneCapture")))
+				]
+
+				// SButton
+				+ SCanvas::Slot()
+				.Position(FVector2D(100, 310))
+				.Size(FVector2D(200, 25))
+				[
+					SNew(SButton)
+						.Text(FText::FromString(TEXT("MovieSceneCapture Close")))
+						.OnClicked_Lambda([this]()
+							{
+								UE_LOG(LogTemp, Log, TEXT("Button OnMovieSceneCapture Close"));
+
+								MovieSceneCaptureHelper::GetInstance().Close();
+
+								return FReply::Handled();
+							})
 				]
 		];
-}
-void SRootWidget::OnMovieSceneCapture()
-{
-	FRequestPlaySessionParams Params;
-
-	GEditor->RequestPlaySession(Params);
 }
 END_SLATE_FUNCTION_BUILD_OPTIMIZATION
