@@ -10,7 +10,6 @@
 
 #include "Engine/GameEngine.h"
 #include "MovieSceneCapture/Public/MovieSceneCaptureModule.h"
-#include "MovieScene/Public/MovieSceneTimeController.h"
 
 MovieSceneCaptureHelper::MovieSceneCaptureHelper()
 {
